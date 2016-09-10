@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout"
+    android:background="#FFFFFF"
+   tools:context="com.wayww.edittextfirework_demo.MainActivity">
+
+    <TextView
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#6e6e6e"
+        android:gravity="center"
+        android:text="EditText-Firework"/>
+    <EditText
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#6e6e6e"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_text"/>
+    <com.wayww.edittextfirework.FireworkView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fire_work"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="day"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/day"
+        android:layout_alignTop="@+id/night"
+        android:layout_alignRight="@+id/edit_text"
+        android:layout_alignEnd="@+id/edit_text" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="night"
+        android:textColor="#000000"
+        android:id="@+id/night"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/edit_text"
+        android:layout_alignStart="@+id/edit_text" />
+</RelativeLayout>
