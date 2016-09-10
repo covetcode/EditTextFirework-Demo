@@ -10,7 +10,7 @@ Getting started
 ---------------
 Add dependency to your build.gradle.
 ```groovy
-compile 'com.robinhood.ticker::edittextfirework'
+compile 'com.robinhood.ticker:edittextfirework'
 ```
 
 Usage
