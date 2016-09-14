@@ -10,7 +10,8 @@ Getting started
 ---------------
 Add dependency to your build.gradle.
 ```groovy
-compile 'com.wayww.edittextfirework'
+compile project(path: ':edittextfirework')
+
 ```
 
 Usage
