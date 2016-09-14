@@ -8,9 +8,17 @@
 
 Getting started
 ---------------
+copy "edittextfirework" to your project.
 Add dependency to your build.gradle.
+in settings.gradle.
 ```groovy
-compile project(path: ':edittextfirework')
+include ':app', ':edittextfirework'
+```
+in build.gradle(app).
+```groovy
+dependencies {
+    compile project(path: ':edittextfirework')
+}
 
 ```
 
