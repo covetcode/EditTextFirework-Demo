@@ -70,7 +70,11 @@ public class FireworkView extends View {
     }
 
 
+    public void removeBind(){
+             mEditText.removeTextChangedListener(mTextWatcher);
+             mEditText = null;
 
+            }
 
 
     //~~~~~~~~~~~~~private method~~~~~~~~~~~~~~~~~~~
