@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import java.lang.reflect.Field;
@@ -26,6 +27,7 @@ public class FireworkView extends View {
     private EditText mEditText;
     private LinkedList<Firework> fireworks = new LinkedList<>();
     private int windSpeed;
+    private TextWatcher mTextWatcher;
 
     public FireworkView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -44,7 +46,7 @@ public class FireworkView extends View {
       //  this.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
 
         this.mEditText = editText;
-        mEditText.addTextChangedListener(new TextWatcher() {
+        mEditText.addTextChangedListener( mTextWatcher = new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -69,12 +71,11 @@ public class FireworkView extends View {
         });
     }
 
-
     public void removeBind(){
-             mEditText.removeTextChangedListener(mTextWatcher);
-             mEditText = null;
+        mEditText.removeTextChangedListener(mTextWatcher);
+        mEditText = null;
+    }
 
-            }
 
 
     //~~~~~~~~~~~~~private method~~~~~~~~~~~~~~~~~~~
@@ -132,7 +133,7 @@ public class FireworkView extends View {
             getExtendedPaddingTop.setAccessible(true);
             if (drawable != null){
                 Rect bounds = drawable[0].getBounds();
-                Log.d(TAG,bounds.toString());
+        //        Log.d(TAG,bounds.toString());
                 xOffset = (int) getCompoundPaddingLeft.invoke(mEditText) + bounds.left;
                 yOffset = (int) getExtendedPaddingTop.invoke(mEditText) + (int)getVerticalOffset.invoke(mEditText, false)+bounds.bottom;
             }
@@ -150,12 +151,17 @@ public class FireworkView extends View {
         float x = mEditText.getX() + xOffset;
         float y = mEditText.getY() + yOffset;
 
-        return new float[]{ x , y};
-    }
+        //当EditText的父view与FireworkView的坐标（左上角的坐标值）不一致时进行修正
+        int[] positionE = new int[2];
+        if (mEditText.getParent() != null) {
+            ((ViewGroup)mEditText.getParent()).getLocationInWindow(positionE);
+        }
+        int[] positionF = new int[2];
+        this.getLocationInWindow(positionF);
+        x = x+positionE[0]-positionF[0];
+        y = y+positionE[1]-positionF[1];
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        return new float[]{x , y};
     }
 
     @Override
